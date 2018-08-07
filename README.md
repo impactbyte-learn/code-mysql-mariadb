@@ -74,15 +74,14 @@ USE glintsacademy;
 
 ```sql
 CREATE TABLE users (
-   id INT NOT NULL,
+   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    name VARCHAR(100) NOT NULL,
    email VARCHAR(100) NOT NULL,
    password VARCHAR(100) NOT NULL,
-   PRIMARY KEY(id)
 );
 
 CREATE TABLE todos (
-   id INT NOT NULL,
+   id INT NOT NULL AUTO_INCREMENT,
    text VARCHAR(140) NOT NULL,
    user_id INT NOT NULL,
    PRIMARY KEY(id),
@@ -104,4 +103,55 @@ SELECT * FROM users;
 SELECT * FROM todos;
 ```
 
+### Alter table datatype and add constraint
+
+```sql
+/* DO NOT USE THIS IN PRODUCTION */
+SET FOREIGN_KEY_CHECKS = 0;
+ALTER TABLE users CHANGE id id INT AUTO_INCREMENT;
+SET FOREIGN_KEY_CHECKS = 1;
+```
+
+```sql
+ALTER TABLE users
+ADD CONSTRAINT constraint_unique UNIQUE(id, email);
+```
+
 ### Insert data to tables
+
+**Command:**
+
+```sql
+INSERT INTO users (name, email, password)
+VALUES
+    ('Haidar', 'haidar@impactbyte.com', 'halodunia'),
+    ('Jakarta', 'jakarta@impactbyte.com', 'halojakarta'),
+    ('Batam', 'batam@impactbyte.com', 'halobatam');
+```
+
+**Result:**
+
+```txt
+Query OK, 3 rows affected
+Time: 0.001s
+```
+
+### Select all data from tables
+
+**Command:**
+
+```sql
+SELECT * FROM users, todos;
+```
+
+**Result:**
+
+```txt
++----+---------+------------------------+-------------+
+| id | name    | email                  | password    |
++----+---------+------------------------+-------------+
+| 1  | Haidar  | haidar@impactbyte.com  | halodunia   |
+| 2  | Jakarta | jakarta@impactbyte.com | halojakarta |
+| 3  | Batam   | batam@impactbyte.com   | halobatam   |
++----+---------+------------------------+-------------+
+```
