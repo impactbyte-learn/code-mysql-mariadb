@@ -6,12 +6,14 @@ Example code on how to use MySQL/MariaDB, in order to create a users & todos dat
 
 ### Users
 
-| Field      | Type           | Null | Key   |
-| ---------- | -------------- | ---- | ----- |
-| `id`       | `int(11)`      | `NO` | `PRI` |
-| `name`     | `varchar(100)` | `NO` |       |
-| `email`    | `varchar(100)` | `NO` |       |
-| `password` | `varchar(100)` | `NO` |       |
+| Field      | Type            | Null | Key   |
+| ---------- | --------------- | ---- | ----- |
+| `id`       | `int(11)`       | `NO` | `PRI` |
+| `email`    | `varchar(100)`  | `NO` |       |
+| `password` | `varchar(100)`  | `NO` |       |
+| `name`     | `varchar(100)`  | `NO` |       |
+| `username` | `varchar(50)`   | `NO` |       |
+| `gender`   | `enum('M','F')` |      |       |
 
 ### Todos
 
@@ -74,10 +76,13 @@ USE glintsacademy;
 
 ```sql
 CREATE TABLE users (
-   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   name VARCHAR(100) NOT NULL,
+   id INT NOT NULL AUTO_INCREMENT,
    email VARCHAR(100) NOT NULL,
    password VARCHAR(100) NOT NULL,
+   name VARCHAR(100) NOT NULL,
+   username VARCHAR(50) NOT NULL,
+   gender ENUM('M','F'),
+   PRIMARY KEY(id)
 );
 
 CREATE TABLE todos (
@@ -91,9 +96,35 @@ CREATE TABLE todos (
 
 ### Show tables and description
 
+**Command:**
+
 ```sql
 SHOW TABLES;
 DESC users;
+DESC todos;
+```
+
+**Result:**
+
+```txt
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int(11)      | NO   | PRI | <null>  | auto_increment |
+| name     | varchar(100) | NO   |     | <null>  |                |
+| email    | varchar(100) | NO   |     | <null>  |                |
+| password | varchar(100) | NO   |     | <null>  |                |
++----------+--------------+------+-----+---------+----------------+
+```
+
+```txt
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | <null>  | auto_increment |
+| text    | varchar(140) | NO   |     | <null>  |                |
+| user_id | int(11)      | NO   | MUL | <null>  |                |
++---------+--------------+------+-----+---------+----------------+
 ```
 
 ### Select all data from tables
@@ -129,10 +160,20 @@ VALUES
     ('Batam', 'batam@impactbyte.com', 'halobatam');
 ```
 
+```sql
+INSERT INTO todos (text, user_id)
+VALUES
+    ('Learn data design', 1),
+    ('Install DBMS', 1),
+    ('Learn SQL syntax', 1),
+    ('Establish company', 2),
+    ('Exchange partnership', 2);
+```
+
 **Result:**
 
 ```txt
-Query OK, 3 rows affected
+Query OK, ? rows affected
 Time: 0.001s
 ```
 
@@ -154,4 +195,22 @@ SELECT * FROM users, todos;
 | 2  | Jakarta | jakarta@impactbyte.com | halojakarta |
 | 3  | Batam   | batam@impactbyte.com   | halobatam   |
 +----+---------+------------------------+-------------+
+```
+
+```txt
++----+----------------------+---------+
+| id | text                 | user_id |
++----+----------------------+---------+
+| 1  | Learn data design    | 1       |
+| 2  | Install DBMS         | 1       |
+| 3  | Learn SQL syntax     | 1       |
+| 4  | Establish company    | 2       |
+| 5  | Exchange partnership | 2       |
+```
+
+### Delete rows in tables
+
+```sh
+DELETE FROM users;
+DELETE FROM todos;
 ```
