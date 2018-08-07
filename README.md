@@ -6,20 +6,20 @@ Example code on how to use MySQL/MariaDB, in order to create a users & todos dat
 
 ### Users
 
-| Field    | Type         | Null | Key |
-| -------- | ------------ | ---- | --- |
-| id       | int(11)      | NO   | PRI |
-| name     | varchar(100) | NO   |     |
-| email    | varchar(100) | NO   |     |
-| password | varchar(100) | NO   |     |
+| Field      | Type           | Null | Key   |
+| ---------- | -------------- | ---- | ----- |
+| `id`       | `int(11)`      | `NO` | `PRI` |
+| `name`     | `varchar(100)` | `NO` |       |
+| `email`    | `varchar(100)` | `NO` |       |
+| `password` | `varchar(100)` | `NO` |       |
 
 ### Todos
 
-| Field   | Type         | Null | Key |
-| ------- | ------------ | ---- | --- |
-| id      | int(11)      | NO   | PRI |
-| text    | varchar(140) | NO   |     |
-| user_id | int(11)      | NO   | MUL |
+| Field     | Type           | Null | Key   |
+| --------- | -------------- | ---- | ----- |
+| `id`      | `int(11)`      | `NO` | `PRI` |
+| `text`    | `varchar(140)` | `NO` |       |
+| `user_id` | `int(11)`      | `NO` | `MUL` |
 
 ---
 
