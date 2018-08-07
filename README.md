@@ -1,12 +1,25 @@
 # Code MySQL/MariaDB
 
+Example code on how to use MySQL/MariaDB, in order to create a users & todos database/dataset.
+
 ## Data Schema
 
 ### Users
 
+| Field    | Type         | Null | Key |
+| -------- | ------------ | ---- | --- |
+| id       | int(11)      | NO   | PRI |
+| name     | varchar(100) | NO   |     |
+| email    | varchar(100) | NO   |     |
+| password | varchar(100) | NO   |     |
+
 ### Todos
 
-### Addresses
+| Field   | Type         | Null | Key |
+| ------- | ------------ | ---- | --- |
+| id      | int(11)      | NO   | PRI |
+| text    | varchar(140) | NO   |     |
+| user_id | int(11)      | NO   | MUL |
 
 ---
 
@@ -77,10 +90,11 @@ CREATE TABLE todos (
 );
 ```
 
-### Show tables
+### Show tables and description
 
 ```sql
 SHOW TABLES;
+DESC users;
 ```
 
 ### Select all data from tables
