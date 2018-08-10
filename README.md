@@ -1,5 +1,7 @@
 # Code MySQL/MariaDB
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/impactbyte-learn/code-mysql-mariadb.svg)](https://greenkeeper.io/)
+
 Example code on how to use MySQL/MariaDB, in order to create a users & todos database/dataset.
 
 ## Data Schema
